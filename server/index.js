@@ -81,7 +81,14 @@ app.get('/api/files', async (req, res) => {
             files: fileList.filter(Boolean)
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.error('Error listing files:', err);
+        if (err.code === 'ENOENT') {
+            return res.status(404).json({ error: 'Path not found', code: 'ENOENT' });
+        }
+        if (err.code === 'EACCES') {
+            return res.status(403).json({ error: 'Permission denied', code: 'EACCES' });
+        }
+        res.status(500).json({ error: err.message || 'Internal Server Error' });
     }
 });
 

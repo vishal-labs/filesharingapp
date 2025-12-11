@@ -62,7 +62,8 @@ export default function FileExplorer() {
             setFiles(sorted);
         } catch (err) {
             console.error(err);
-            setError('Failed to load files');
+            const msg = err.response?.data?.error || 'Failed to load files';
+            setError(msg);
         } finally {
             setLoading(false);
         }

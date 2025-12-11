@@ -8,7 +8,7 @@ services:
     volumes:
       # Mount the entire host file system to /data in container
       # WARNING: This gives full access to host files.
-      - /Users/vishaldodda/:data
+      - /Users/vishaldodda/:/data
     environment:
       - PORT=3000
       - ROOT_PATH=/data
