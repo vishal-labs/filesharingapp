@@ -1,0 +1,15 @@
+services:
+  file-manager:
+    build: .
+    image: file-manager
+    container_name: file-manager
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount the entire host file system to /data in container
+      # WARNING: This gives full access to host files.
+      - /Users/vishaldodda/:data
+    environment:
+      - PORT=3000
+      - ROOT_PATH=/data
+    restart: unless-stopped
